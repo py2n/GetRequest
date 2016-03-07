@@ -89,7 +89,7 @@ public class getRequest extends Activity{
             result=result.substring(begining, end);
             result=result.replace(',',' ');
             String regex="(?=\\()|(?<=\\)\\d)";
-            String [] request=result.split(regex);
+            String [] request=result.split(regex); // now incoming request converted to string []
             for (int i=1;i<request.length;i++){
                 updateDisplay(request[i]+'\n');
             }
