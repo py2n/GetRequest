@@ -46,7 +46,7 @@ public class getRequest extends Activity{
             if (result.contains("new version"))
                 output.setText("لطفا نرم افزار خود را بروز رسانی کنید");
 
-            output.setText(result);
+            output.append(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,6 +84,15 @@ public class getRequest extends Activity{
 
         @Override
         protected void onPostExecute(String result) {
+            int begining=result.indexOf("body")+5;
+            int end=result.lastIndexOf("body")-2;
+            result=result.substring(begining, end);
+            result=result.replace(',',' ');
+            String regex="(?=\\()|(?<=\\)\\d)";
+            String [] request=result.split(regex);
+            for (int i=1;i<request.length;i++){
+                updateDisplay(request[i]+'\n');
+            }
             try {
                 tasks.remove(this);
                 if (tasks.size() == 0) {
@@ -91,7 +100,7 @@ public class getRequest extends Activity{
                 }
                 if (result.contains("error"))
                     updateDisplay("problem on connecting to service provider");
-                updateDisplay(result);
+//                updateDisplay(result);
             } catch (Exception e) {
                 System.out.println("error occured in " + e.toString());
                 updateDisplay("problem on sending the request");
