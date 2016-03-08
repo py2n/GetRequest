@@ -37,9 +37,9 @@ public class getRequest extends Activity{
         try {
             if (result.contains("Congratulation"))
                 output.setText("Congratulation new mac address added to database" + "\n");
-            else if (result.contains("been") && flag == true)
+            else if (result.contains("been") && flag)
                 output.setText("درخواست روشن شدن با موفقیت ثبت شد \n");
-            else if (result.contains("been") && flag == false)
+            else if (result.contains("been") && !flag)
                 output.setText("درخواست خاموش شدن با موفقیت ثبت شد \n");
             else if (result.contains("error"))
                 output.setText("در حال حاضر امکان برقراری ارتباط با\n مرکز سرویس دهی موجود نمی باشد \n");
