@@ -3,6 +3,7 @@ package com.mohammad.getrequest;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class getRequest extends Activity{
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
         pb = (ProgressBar) findViewById(R.id.progressBar2);
         output = (TextView) findViewById(R.id.textView);
+        output.setMovementMethod(new ScrollingMovementMethod());
         tasks = new ArrayList<>();
         Bundle data=getIntent().getExtras();
         String request;
@@ -37,9 +39,9 @@ public class getRequest extends Activity{
         try {
             if (result.contains("Congratulation"))
                 output.setText("Congratulation new mac address added to database" + "\n");
-            else if (result.contains("been") && flag)
+            else if (result.contains("been") && flag == true)
                 output.setText("درخواست روشن شدن با موفقیت ثبت شد \n");
-            else if (result.contains("been") && !flag)
+            else if (result.contains("been") && flag == false)
                 output.setText("درخواست خاموش شدن با موفقیت ثبت شد \n");
             else if (result.contains("error"))
                 output.setText("در حال حاضر امکان برقراری ارتباط با\n مرکز سرویس دهی موجود نمی باشد \n");
@@ -60,7 +62,7 @@ public class getRequest extends Activity{
                 pb.setVisibility(View.INVISIBLE);
                 RequestPackage p = new RequestPackage();
                 p.setMethod("POST");
-                p.setUri("http://192.168.56.1:8000/rtc");
+                p.setUri("http://136.243.163.16:8000/rtc");
                 p.setParam("mac_addr", "00:00:00:00:00:45");
                 flag = true;
                 MyTask task = new MyTask();
